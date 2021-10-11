@@ -2,30 +2,25 @@ version: '2'
 
 services:
   spark:
-    image: s1mple1995/spark-hadoop:3
+    image: s1mplecc/spark-hadoop:3
     hostname: master
     environment:
       - SPARK_MODE=master
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      # - SPARK_SSL_ENABLED=yes
-      # - SPARK_SSL_KEY_PASSWORD=KEY_PASSWORD
-      # - SPARK_SSL_KEYSTORE_PASSWORD=KEYSTORE_PASSWORD
-      # - SPARK_SSL_TRUSTSTORE_PASSWORD=TRUSTSTORE_PASSWORD
-      # - SPARK_SSL_NEED_CLIENT_AUTH=yes
-      # - SPARK_SSL_PROTOCOL=TLSv1.2
+      - SPARK_SSL_ENABLED=no
     volumes:
       - ~/docker/spark/share:/opt/share
     ports:
       - '8080:8080'
       - '4040:4040'
-      # - '8088:8088'
-      # - '8042:8042'
-      # - '9870:9870'
-      # - '50070:50070'
+      - '8088:8088'
+      - '8042:8042'
+      - '9870:9870'
+      - '19888:19888'
   spark-worker-1:
-    image: s1mple1995/spark-hadoop:3
+    image: s1mplecc/spark-hadoop:3
     hostname: worker1
     environment:
       - SPARK_MODE=worker
@@ -35,18 +30,13 @@ services:
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      # - SPARK_SSL_ENABLED=yes
-      # - SPARK_SSL_KEY_PASSWORD=KEY_PASSWORD
-      # - SPARK_SSL_KEYSTORE_PASSWORD=KEYSTORE_PASSWORD
-      # - SPARK_SSL_TRUSTSTORE_PASSWORD=TRUSTSTORE_PASSWORD
-      # - SPARK_SSL_NEED_CLIENT_AUTH=yes
-      # - SPARK_SSL_PROTOCOL=TLSv1.2
+      - SPARK_SSL_ENABLED=no
     volumes:
       - ~/docker/spark/share:/opt/share
     ports:
       - '8081:8081'
   spark-worker-2:
-    image: s1mple1995/spark-hadoop:3
+    image: s1mplecc/spark-hadoop:3
     hostname: worker2
     environment:
       - SPARK_MODE=worker
@@ -56,12 +46,7 @@ services:
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      # - SPARK_SSL_ENABLED=yes
-      # - SPARK_SSL_KEY_PASSWORD=KEY_PASSWORD
-      # - SPARK_SSL_KEYSTORE_PASSWORD=KEYSTORE_PASSWORD
-      # - SPARK_SSL_TRUSTSTORE_PASSWORD=TRUSTSTORE_PASSWORD
-      # - SPARK_SSL_NEED_CLIENT_AUTH=yes
-      # - SPARK_SSL_PROTOCOL=TLSv1.2
+      - SPARK_SSL_ENABLED=no
     volumes:
       - ~/docker/spark/share:/opt/share
     ports:
