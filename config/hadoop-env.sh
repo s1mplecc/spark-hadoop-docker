@@ -94,20 +94,20 @@
 # Some parts of the shell code may do special things dependent upon
 # the operating system.  We have to set this here. See the next
 # section as to why....
-export HADOOP_OS_TYPE=${HADOOP_OS_TYPE:-$(uname -s)}
+# export HADOOP_OS_TYPE=${HADOOP_OS_TYPE:-$(uname -s)}
 
 
 # Under certain conditions, Java on OS X will throw SCDynamicStore errors
 # in the system logs.
 # See HADOOP-8719 for more information.  If one needs Kerberos
 # support on OS X, one will want to change/remove this extra bit.
-case ${HADOOP_OS_TYPE} in
-  Darwin*)
-    export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.realm= "
-    export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.kdc= "
-    export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.conf= "
-  ;;
-esac
+# case ${HADOOP_OS_TYPE} in
+#   Darwin*)
+#     export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.realm= "
+#     export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.kdc= "
+#     export HADOOP_OPTS="${HADOOP_OPTS} -Djava.security.krb5.conf= "
+#   ;;
+# esac
 
 # Extra Java runtime options for some Hadoop commands
 # and clients (i.e., hdfs dfs -blah).  These get appended to HADOOP_OPTS for
@@ -431,3 +431,11 @@ esac
 export JAVA_HOME=/opt/bitnami/java
 export HADOOP_HOME=/opt/hadoop/
 export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop/
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+
+export HDFS_NAMENODE_USER="root"
+export HDFS_DATANODE_USER="root"
+export HDFS_SECONDARYNAMENODE_USER="root"
+export YARN_RESOURCEMANAGER_USER="root"
+export YARN_NODEMANAGER_USER="root"

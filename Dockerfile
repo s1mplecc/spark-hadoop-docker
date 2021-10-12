@@ -1,5 +1,7 @@
 FROM docker.io/bitnami/spark:3
-LABEL maintainer "s1mplecc <s1mple951205@gmail.com>"
+LABEL maintainer="s1mplecc <s1mple951205@gmail.com>"
+LABEL description="Docker image with Spark (3.1.2) and Hadoop (3.2.0), based on bitnami/spark:3. \
+For more information, please visit https://github.com/s1mplecc/spark-hadoop-docker."
 
 USER root
 
@@ -10,7 +12,7 @@ ENV PATH="$HADOOP_HOME/hadoop/sbin:$HADOOP_HOME/bin:$PATH"
 
 WORKDIR /opt
 
-RUN apt-get update && apt-get install -y openssh-server vim iputils-ping net-tools
+RUN apt-get update && apt-get install -y openssh-server
 
 RUN ssh-keygen -t rsa -f /root/.ssh/id_rsa -P '' && \
     cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
@@ -32,8 +34,9 @@ RUN mv /tmp/ssh_config /root/.ssh/config && \
     mv /tmp/core-site.xml $HADOOP_CONF_DIR/core-site.xml && \
     mv /tmp/mapred-site.xml $HADOOP_CONF_DIR/mapred-site.xml && \
     mv /tmp/yarn-site.xml $HADOOP_CONF_DIR/yarn-site.xml && \
-    mv /tmp/slaves $HADOOP_CONF_DIR/slaves && \
-    mv /tmp/start-hadoop.sh /opt/start-hadoop.sh
+    mv /tmp/slaves $HADOOP_CONF_DIR/slaves
+
+COPY start-hadoop.sh /opt/start-hadoop.sh
 
 RUN chmod +x /opt/start-hadoop.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
