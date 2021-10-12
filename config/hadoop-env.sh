@@ -429,5 +429,5 @@ esac
 # For example, to limit who can execute the namenode command,
 # export HDFS_NAMENODE_USER=hdfs
 export JAVA_HOME=/opt/bitnami/java
-export HADOOP_HOME=/opt/bitnami/hadoop/
-export HADOOP_CONF_DIR=/opt/bitnami/hadoop/etc/hadoop/
+export HADOOP_HOME=/opt/hadoop/
+export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop/

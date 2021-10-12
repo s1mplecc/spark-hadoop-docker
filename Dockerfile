@@ -3,12 +3,12 @@ LABEL maintainer "s1mplecc <s1mple951205@gmail.com>"
 
 USER root
 
-ENV HADOOP_HOME="/opt/bitnami/hadoop"
+ENV HADOOP_HOME="/opt/hadoop"
 ENV HADOOP_CONF_DIR="$HADOOP_HOME/etc/hadoop"
 ENV HADOOP_LOG_DIR="/var/log/hadoop"
 ENV PATH="$HADOOP_HOME/hadoop/sbin:$HADOOP_HOME/bin:$PATH"
 
-WORKDIR /opt/bitnami
+WORKDIR /opt
 
 RUN apt-get update && apt-get install -y openssh-server vim iputils-ping net-tools
 
@@ -21,8 +21,8 @@ RUN tar -xzvf hadoop-3.2.0.tar.gz && \
 	rm -rf hadoop-3.2.0.tar.gz && \
 	mkdir /var/log/hadoop
 
-RUN mkdir -p ~/hdfs/namenode && \ 
-    mkdir -p ~/hdfs/datanode 
+RUN mkdir -p /root/hdfs/namenode && \ 
+    mkdir -p /root/hdfs/datanode 
 
 COPY config/* /tmp/
 
@@ -33,9 +33,9 @@ RUN mv /tmp/ssh_config /root/.ssh/config && \
     mv /tmp/mapred-site.xml $HADOOP_CONF_DIR/mapred-site.xml && \
     mv /tmp/yarn-site.xml $HADOOP_CONF_DIR/yarn-site.xml && \
     mv /tmp/slaves $HADOOP_CONF_DIR/slaves && \
-    mv /tmp/start-hadoop.sh /opt/bitnami/scripts/start-hadoop.sh
+    mv /tmp/start-hadoop.sh /opt/start-hadoop.sh
 
-RUN chmod +x /opt/bitnami/scripts/start-hadoop.sh && \
+RUN chmod +x /opt/start-hadoop.sh && \
     chmod +x $HADOOP_HOME/sbin/start-dfs.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh 
 
