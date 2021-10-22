@@ -1,11 +1,9 @@
 ## 介绍
 
-基于 [bitnami-docker-spark](https://github.com/bitnami/bitnami-docker-spark) 镜像，构建了包含对应版本 Hadoop 的镜像。目的在于免去繁杂的环境配置工作，提供开箱即用的 Spark + Hadoop Docker 容器集群部署方案。
+为了免去繁杂的环境配置工作，提供开箱即用的 Spark + Hadoop 快捷部署方案。基于 [BitNami](https://github.com/bitnami/bitnami-docker-spark) 项目的成熟镜像方案，搭建 Spark Docker 集群，并在原有镜像基础上，构建了安装有对应版本 Hadoop 的镜像。详细构建过程请参考：[使用 Docker 快速部署 Spark + Hadoop 大数据集群](https://s1mple.cc/2021/10/12/%E4%BD%BF%E7%94%A8-Docker-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2-Spark-Hadoop-%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BE%A4/)。
 
 - Spark Version：3.1.2
 - Hadoop Version：3.2.0
-
-详细构建过程请参考：[使用 Docker 快速部署 Spark + Hadoop 大数据集群](https://s1mple.cc/2021/10/12/%E4%BD%BF%E7%94%A8-Docker-%E5%BF%AB%E9%80%9F%E9%83%A8%E7%BD%B2-Spark-Hadoop-%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BE%A4/)。
 
 ## 如何运行
 
@@ -21,11 +19,22 @@ docker pull s1mplecc/spark-hadoop:3
 docker-compose up -d
 ```
 
-执行 `docker exec -it`，在容器内运行 Hadoop 启动脚本：
+在容器内运行 Hadoop 启动脚本：
 
 ```sh
 $ ./start-hadoop.sh
 ```
+
+## 运行 MapReduce 示例程序
+
+```sh
+$ hdfs dfs -put share/words.txt /
+$ hadoop jar share/bigdata-learning-0.0.1.jar example.mapreduce.WordCount /words.txt /output
+```
+
+## 运行 Spark 示例程序
+
+TODO
 
 ## Web UI 汇总
 
