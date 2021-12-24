@@ -43,6 +43,7 @@ RUN chmod +x /opt/start-hadoop.sh && \
     chmod +x $HADOOP_HOME/sbin/start-yarn.sh 
 
 RUN hdfs namenode -format
+RUN sed -i "1 a /etc/init.d/ssh start > /dev/null &" /opt/bitnami/scripts/spark/entrypoint.sh
 
 ENTRYPOINT [ "/opt/bitnami/scripts/spark/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/spark/run.sh" ]
