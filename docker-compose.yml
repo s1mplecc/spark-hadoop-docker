@@ -19,6 +19,8 @@ services:
       - '8042:8042'
       - '9870:9870'
       - '19888:19888'
+    command:
+      - /opt/start-hadoop.sh
   spark-worker-1:
     image: s1mplecc/spark-hadoop:3
     hostname: worker1
